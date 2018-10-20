@@ -42,11 +42,11 @@ public class BuyerProductController {
             categoryTypeList.add(productInfo.getCategoryType());
         }*/
 
-
         List<Integer> categoryTypeList = productInfoList.stream().map(e -> e.getCategoryType()).collect(Collectors.toList());
 
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
+        //数据拼装
         List<ProductVO> productVOList = new ArrayList<>();
         for (ProductCategory productCategory :
                 productCategoryList) {

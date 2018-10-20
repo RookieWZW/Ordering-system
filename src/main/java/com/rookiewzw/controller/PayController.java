@@ -28,9 +28,8 @@ public class PayController {
 
     @GetMapping("/create")
     public ModelAndView create(@RequestParam("orderId") String orderId,
-                               @RequestParam("returnUrl") String returnurl,
+                               @RequestParam("returnUrl") String returnUrl,
                                Map<String, Object> map) {
-
         OrderDTO orderDTO = orderService.findOne(orderId);
         if (orderDTO == null) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
@@ -39,7 +38,7 @@ public class PayController {
         PayResponse payResponse = payService.create(orderDTO);
 
         map.put("payResponse", payResponse);
-        map.put("returnUrl", returnurl);
+        map.put("returnUrl", returnUrl);
 
         return new ModelAndView("pay/create", map);
     }

@@ -1,8 +1,12 @@
 package com.rookiewzw.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.rookiewzw.dataobject.OrderDetail;
+import com.rookiewzw.enums.OrderStatusEnum;
+import com.rookiewzw.enums.PayStatusEnum;
+import com.rookiewzw.utils.EnumUtil;
 import com.rookiewzw.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -50,5 +54,15 @@ public class OrderDTO {
 
     List<OrderDetail> orderDetailList;
 
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 
 }

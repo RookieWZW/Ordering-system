@@ -36,11 +36,14 @@ public class WechatController {
     private ProjectUrlConfig projectUrlConfig;
 
     @GetMapping("/authorize")
-    public String authorize(@RequestParam("returnUrl")String returnUrl){
+    public String authorize(@RequestParam("returnUrl") String returnUrl) {
+        //1. 配置
+        //2. 调用方法
         String url = projectUrlConfig.getWechatMpAuthorize() + "/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         return "redirect:" + redirectUrl;
     }
+
     @GetMapping("/userInfo")
     public String userInfo(@RequestParam("code") String code,
                            @RequestParam("state") String returnUrl) {
